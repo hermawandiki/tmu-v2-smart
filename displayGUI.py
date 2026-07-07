@@ -7,14 +7,29 @@ class DisplayGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("Data Stream")
+
+	# ===== FULLSCREEN =====
+        self.root.attributes('-fullscreen', True)
+        self.root.bind('<Escape>', self.exitEsc)
+
         width = self.root.winfo_screenwidth()
         height = self.root.winfo_screenheight()
-        self.root.geometry(f"{width}x{height}")
+        self.root.geometry(f"{width}x{height}+0+0")
         self.root.attributes("-topmost", True)
         self.ds = DataStream()
 
         self.pageNow = 0
         self.timeThen = time.time()
+
+	# ===== EXIT BUTTON =====
+        self.btn_exit = tk.Button(
+            self.root,
+            text="Exit",
+            font=("Arial", 11, "bold"),
+            bg="#AF3F3E",
+            command=self.exitEsc
+        )
+        self.btn_exit.pack(pady=10)
 
         # ===== DATA LABELS =====
         self.data_labels = []
@@ -41,6 +56,10 @@ class DisplayGUI:
         self.update_loop()
 
     # =============================
+
+    def exitEsc(self, event=None):
+        self.root.attributes('-fullscreen', False)
+        self.root.destroy()
 
     def updatePages(self, snapshot):
 

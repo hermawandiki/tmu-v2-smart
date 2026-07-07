@@ -20,7 +20,7 @@ transmitterModeMinus = False
 
 exhibitStat = False
 OLTCstat = False
-pressureStat = True
+pressureStat = False
 tempStat = True
 
 companyKey = "P66geqk4bYQuetarke2Z"
@@ -51,7 +51,7 @@ def main():
     dataLen = 56
     watchedData = 29
     CTratio = 1
-    PTratio = 1
+    PTratio = 60
     eddyLosesGroup = 0.02
     designedKrated = 1
     loadCoef = 5

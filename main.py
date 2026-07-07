@@ -39,6 +39,10 @@ class App:
             logging.debug("Sleep 1s then start displayGUI.py")
             time.sleep(1)
             self.proc3 = self.start_proc("displayGUI.py")
+              
+            logging.debug("Sleep 1s then start modbusTcpServer.py")
+            time.sleep(1)
+            self.proc4 = self.start_proc("modbusTcpServer.py")
 
             logging.debug("Init GUI Tkinter")
             self.main_screen = initTkinter()
@@ -58,15 +62,18 @@ class App:
             self.thread3 = threading.Thread(
                 target=self.stream_proc, args=(self.proc3, 1), daemon=True)
             self.thread4 = threading.Thread(
+                target=self.stream_proc, args=(self.proc4, 1), daemon=True)
+            self.thread5 = threading.Thread(
                 target=self.watchdog, args=(60,), daemon=True)
 
+            self.update_tk()
+            self.main_screen.screen.mainloop()
             self.thread1.start()
             self.thread2.start()
             self.thread3.start()
             self.thread4.start()
-            self.update_tk()
-            self.main_screen.screen.mainloop()
-
+            self.thread5.start()
+            
         except Exception as e:
             logging.error(f"Error during App initialization: {e}")
             self.terminate_procs()
@@ -219,6 +226,8 @@ class App:
                 self.proc2.terminate()
             if self.proc3:
                 self.proc3.terminate()
+            if self.proc4:
+                self.proc4.terminate()
         except Exception as e:
             logging.error(f"Error during terminate_procs: {e}")
 

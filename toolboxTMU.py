@@ -543,11 +543,12 @@ class TimerEx(object):
 def initTkinter():
     class MyScreen:
         screen = tk.Tk()
+        screen.withdraw()
         screen.title("TMU Gateway")
         width= screen.winfo_screenwidth() 
         height= screen.winfo_screenheight()
         screen.geometry("%dx%d" % (width, height))
-        screen.attributes('-topmost', True)
+        screen.attributes('-topmost', False)
         screen.configure(background='#17C0EB')
 
         restartBtn = tk.Button(
