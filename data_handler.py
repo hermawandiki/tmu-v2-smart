@@ -20,7 +20,7 @@ transmitterModeMinus = False
 
 exhibitStat = False
 OLTCstat = False
-pressureStat = False
+pressureStat = True
 tempStat = True
 
 companyKey = "P66geqk4bYQuetarke2Z"
@@ -50,8 +50,8 @@ def main():
     if infoMsg == True: print("1D|Initialize Program") 
     dataLen = 56
     watchedData = 29
-    CTratio = 1
-    PTratio = 60
+    CTratio = 800
+    PTratio = 1
     eddyLosesGroup = 0.02
     designedKrated = 1
     loadCoef = 5
@@ -466,6 +466,7 @@ def main():
         cycleTime = (round(10000 * (time.time() - start_time)))/10000
         if debugMsg == True: print("1D|Cycle time %s" % cycleTime)
         print("1T|%s" % datetime.datetime.now())
+        # print("1D|Still Running")
         sys.stdout.flush()
         time.sleep(4)
         
